@@ -24,6 +24,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo ${SSH_PRIVATE_KEY} >> ~/.ssh/id_ed25519
+          apt install dos2unix
           dos2unix ~/.ssh/id_ed25519
           chmod 700 ~/.ssh/
           chmod 600 ~/.ssh/id_ed25519
