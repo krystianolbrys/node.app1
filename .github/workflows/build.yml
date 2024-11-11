@@ -35,6 +35,11 @@ jobs:
         run: |
           ssh-keyscan -p 10413 -H ${REMOTE_HOST} >> ~/.ssh/known_hosts
 
+      - name: Add RSA SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Deploy to server
         env:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
