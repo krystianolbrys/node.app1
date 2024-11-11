@@ -35,9 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: |
-            dist
-            date.file
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -68,5 +66,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
-          scp -P 10413 -r date.file "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
-          scp -P 10413 -r dist "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
+          scp -P 10413 -r * "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
