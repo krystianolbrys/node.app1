@@ -17,6 +17,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
+          mkdir .ssh
           ls -la
 
       - name: Add SSH key
