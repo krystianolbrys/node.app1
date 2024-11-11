@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Add  SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
       - name: Add server to known_hosts
         env:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
@@ -18,10 +23,7 @@ jobs:
         run: |
           ssh-keyscan -p 10413 -H ${REMOTE_HOST} >> ~/.ssh/known_hosts
 
-      - name: Add  SSH key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
 
       - name: Deploy to server
         env:
