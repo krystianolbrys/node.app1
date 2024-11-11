@@ -19,10 +19,8 @@ jobs:
         env:
           KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          mkdir /home/runner/.ssh
           echo ${{ secrets.SSH_PRIVATE_KEY }} > /home/runner/.ssh/id_ed25519
           chmod 600 /home/runner/.ssh/id_ed25519
-          chmod 700 /home/runner/.ssh
 
       - name: Deploy to server
         env:
