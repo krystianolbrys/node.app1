@@ -32,4 +32,6 @@ jobs:
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
           echo "Kopiowanie katalogu dist na serwer zdalny..."
+          ls -la .
+          pwd
           scp -v -P 10413 -r * "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
