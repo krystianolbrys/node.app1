@@ -27,13 +27,24 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Zip folder
+        run: zip -r my-folder.zip path/to/your/folder
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-folder
+          path: my-folder.zip
+
   deploy:
     runs-on: ubuntu-latest
     needs: build  # Zależność od jobu build
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: my-folder
           
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.9.0
@@ -54,4 +65,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
-          scp -P 10413 -r * "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
+          scp -P 10413 -r my-folder.zip "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
