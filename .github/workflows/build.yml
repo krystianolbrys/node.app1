@@ -27,6 +27,10 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Add server to known_hosts
+        run: |
+          ssh-keyscan -p 10413 -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.9.0
         with:
