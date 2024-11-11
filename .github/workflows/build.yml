@@ -20,7 +20,6 @@ jobs:
           KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo ${{ secrets.SSH_PRIVATE_KEY }} > /home/runner/.ssh/id_ed25519
-          chmod 600 /home/runner/.ssh/id_ed25519
 
       - name: create .ssh folder 2
         run: |
