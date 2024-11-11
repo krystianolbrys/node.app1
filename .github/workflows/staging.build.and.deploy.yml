@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Zip folder
-        run: zip -r my-folder.zip path/to/your/folder
+        run: zip -r my-folder.zip .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
