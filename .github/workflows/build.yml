@@ -19,6 +19,7 @@ jobs:
         run: |
           mkdir .ssh
           ls -la
+          pwd
 
       - name: Add SSH key
         env:
