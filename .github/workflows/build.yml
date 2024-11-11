@@ -23,8 +23,9 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo ${SSH_PRIVATE_KEY} >> key.private
-          cat key.private
+          echo ${SSH_PRIVATE_KEY} >> mkdir ~/.ssh/id_ed25519
+          chmod 700 ~/.ssh/
+          chmod 600 ~/.ssh/id_ed25519
 
       - name: Deploy to server
         env:
