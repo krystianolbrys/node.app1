@@ -10,20 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: create .ssh folder
-        env:
-          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          echo ${{ secrets.SSH_PRIVATE_KEY }} > /home/runner/.ssh/id_ed25519
-
-      - name: create .ssh folder 2
-        run: |
-          chmod 600 /home/runner/.ssh/id_ed25519
 
       - name: Deploy to server
         env:
@@ -32,4 +23,4 @@ jobs:
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
           echo "Kopiowanie katalogu dist na serwer zdalny..."
-          scp -v -P 10413 -r src "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
+          scp -P 10413 -r src "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
