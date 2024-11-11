@@ -16,7 +16,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo ${SSH_PRIVATE_KEY} >> key.private
-          echo key.private
+          cat key.private
 
       - name: Deploy to server
         env:
