@@ -27,10 +27,6 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Create date file
-        run: |
-          date >> date.file
-
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -42,10 +38,8 @@ jobs:
     needs: build  # Zależność od jobu build
 
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
+      - name: Checkout code
+        uses: actions/checkout@v4
           
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.9.0
